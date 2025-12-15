@@ -27,12 +27,12 @@ export function Navigation() {
       animate={{ y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <div className="container mx-auto px-6 flex items-center justify-between">
+      <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between">
         <Link href="/" className="relative flex items-center hover:opacity-80 transition-opacity">
           <img
             src="/norven-logo-full.png"
             alt="Norven Labs"
-            className={`transition-opacity duration-300 ${isScrolled ? "opacity-0" : "opacity-100"}`}
+            className={`hidden sm:block transition-opacity duration-300 ${isScrolled ? "opacity-0" : "opacity-100"}`}
             style={{
               background: "transparent",
               position: isScrolled ? "absolute" : "relative",
@@ -45,13 +45,26 @@ export function Navigation() {
           <img
             src="/norven-logo-mark.png"
             alt="Norven Labs"
-            className={`transition-opacity duration-300 ${isScrolled ? "opacity-100" : "opacity-0"}`}
+            className={`transition-opacity duration-300 ${isScrolled ? "opacity-100" : "opacity-0 sm:opacity-0"}`}
             style={{
               background: "transparent",
               position: isScrolled ? "relative" : "absolute",
               left: 0,
               top: 0,
-              height: "48px",
+              height: "40px",
+              width: "auto",
+            }}
+          />
+          <img
+            src="/norven-logo-mark.png"
+            alt="Norven Labs"
+            className={`sm:hidden transition-opacity duration-300 ${isScrolled ? "opacity-0" : "opacity-100"}`}
+            style={{
+              background: "transparent",
+              position: isScrolled ? "absolute" : "relative",
+              left: 0,
+              top: 0,
+              height: "40px",
               width: "auto",
             }}
           />
@@ -76,7 +89,7 @@ export function Navigation() {
           ))}
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <Button
             variant="ghost"
             size="sm"
@@ -86,7 +99,7 @@ export function Navigation() {
           </Button>
           <Button
             size="sm"
-            className="bg-primary text-primary-foreground hover:bg-primary/90 active:bg-primary/80 shadow-md hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-all rounded-lg"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 active:bg-primary/80 shadow-md hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-all rounded-lg text-xs sm:text-sm px-3 sm:px-4"
           >
             Book a demo
           </Button>

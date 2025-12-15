@@ -15,13 +15,13 @@ export function HeroSection() {
   }
 
   return (
-    <section className="pt-32 pb-20 px-6 section-hero relative overflow-hidden">
+    <section className="pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-20 px-4 sm:px-6 section-hero relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-x-0 top-1/4 w-full h-96 bg-gradient-radial from-primary/5 to-transparent blur-3xl opacity-40" />
       </div>
 
       <div className="container mx-auto relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -34,11 +34,11 @@ export function HeroSection() {
               </span>
             </div>
 
-            <h1 className="text-5xl lg:text-6xl font-bold tracking-tighter text-foreground leading-[1.1] text-balance">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tighter text-foreground leading-[1.1] text-balance">
               Runtime enforcement for AI agents in production
             </h1>
 
-            <p className="text-lg text-foreground-secondary leading-relaxed text-pretty max-w-xl">
+            <p className="text-base sm:text-lg text-foreground-secondary leading-relaxed text-pretty max-w-xl">
               Enterprises already run agents against real systems. The challenge is no longer model capability, but
               controlling execution. Norven is a runtime enforcement layer that verifies agent identity, evaluates
               policy, and records execution context before actions reach production infrastructure.

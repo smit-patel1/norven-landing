@@ -130,19 +130,19 @@ export function PillarsSection() {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
 
   return (
-    <section className="py-24 px-6 section-light">
+    <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 section-light">
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-4xl font-bold text-foreground text-balance">Execution guarantees</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground text-balance">Execution guarantees</h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
           {pillars.map((pillar, index) => {
             const isExpanded = expandedIndex === index
             return (
@@ -154,14 +154,14 @@ export function PillarsSection() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="group"
               >
-                <div className="relative bg-surface-elevated border border-primary/50 rounded-lg p-6 shadow-md hover:shadow-lg transition-all overflow-hidden">
-                  <div className="flex items-start gap-4 mb-3">
-                    <span className="text-sm font-mono text-primary font-semibold">{pillar.number}</span>
-                    <pillar.icon className="w-5 h-5 text-primary flex-shrink-0" />
+                <div className="relative bg-surface-elevated border border-primary/50 rounded-lg p-4 sm:p-6 shadow-md hover:shadow-lg transition-all overflow-hidden">
+                  <div className="flex items-start gap-3 sm:gap-4 mb-3">
+                    <span className="text-xs sm:text-sm font-mono text-primary font-semibold">{pillar.number}</span>
+                    <pillar.icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary flex-shrink-0" />
                   </div>
 
-                  <h3 className="text-xl font-semibold text-foreground mb-2">{pillar.title}</h3>
-                  <p className="text-sm text-foreground-secondary leading-relaxed">{pillar.summary}</p>
+                  <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2">{pillar.title}</h3>
+                  <p className="text-xs sm:text-sm text-foreground-secondary leading-relaxed">{pillar.summary}</p>
 
                   <button
                     onClick={() => setExpandedIndex(isExpanded ? null : index)}
@@ -181,8 +181,8 @@ export function PillarsSection() {
                         className="overflow-hidden"
                       >
                         <div className="pt-4 space-y-3">
-                          <p className="text-sm text-foreground-secondary">{pillar.details.description}</p>
-                          <div className="mt-4">{pillar.uiElement}</div>
+                          <p className="text-xs sm:text-sm text-foreground-secondary">{pillar.details.description}</p>
+                          <div className="mt-4 overflow-x-auto">{pillar.uiElement}</div>
                         </div>
                       </motion.div>
                     )}

@@ -73,9 +73,9 @@ export function DeveloperExperience() {
   }
 
   return (
-    <section className="py-24 px-6 section-mid">
+    <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 section-mid">
       <div className="container mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
           {/* Left - Code with tabs */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -88,13 +88,13 @@ export function DeveloperExperience() {
               {/* Vertical accent strip */}
               <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary" />
 
-              <div className="bg-surface px-4 py-3 border-b border-border flex items-center justify-between">
-                <div className="flex gap-2">
+              <div className="bg-surface px-3 sm:px-4 py-3 border-b border-border flex items-center justify-between">
+                <div className="flex gap-1 sm:gap-2">
                   {(["go", "typescript", "python"] as const).map((lang) => (
                     <motion.button
                       key={lang}
                       onClick={() => setSelectedLang(lang)}
-                      className={`relative px-4 py-2 text-sm font-medium rounded-full transition-all ${
+                      className={`relative px-2 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-full transition-all ${
                         selectedLang === lang
                           ? "text-primary-foreground bg-primary shadow-lg shadow-primary/50"
                           : "text-muted-foreground hover:text-primary hover:bg-surface-elevated"
@@ -124,9 +124,9 @@ export function DeveloperExperience() {
                 initial={{ opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.2 }}
-                className="p-5 overflow-x-auto bg-background"
+                className="p-3 sm:p-5 overflow-x-auto bg-background"
               >
-                <pre className="text-sm font-mono leading-relaxed">
+                <pre className="text-xs sm:text-sm font-mono leading-relaxed">
                   <code className="text-foreground">{codeExamples[selectedLang]}</code>
                 </pre>
               </motion.div>
@@ -187,13 +187,13 @@ export function DeveloperExperience() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="space-y-6"
+            className="space-y-4 sm:space-y-6"
           >
-            <h2 className="text-4xl font-bold text-foreground leading-tight text-balance">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground leading-tight text-balance">
               Drop-in enforcement for existing agent systems
             </h2>
 
-            <ul className="space-y-3 text-foreground-secondary leading-relaxed">
+            <ul className="space-y-2 sm:space-y-3 text-sm sm:text-base text-foreground-secondary leading-relaxed">
               <li className="flex items-start gap-2">
                 <span className="text-primary mt-1">•</span>
                 <span>TypeScript, Python, and Go SDKs</span>

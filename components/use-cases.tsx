@@ -53,22 +53,22 @@ export function UseCases() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null)
 
   return (
-    <section className="py-24 px-6 section-mid">
+    <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 section-mid">
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-4xl font-bold text-foreground mb-4">Designed for internal platform teams</h2>
-          <p className="text-lg text-foreground-secondary max-w-2xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">Designed for internal platform teams</h2>
+          <p className="text-base sm:text-lg text-foreground-secondary max-w-2xl mx-auto">
             Infrastructure that platform, security, and application teams can rely on for agent deployments
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-4 sm:gap-6">
           {personas.map((persona, index) => (
             <motion.div
               key={persona.role}
@@ -85,7 +85,7 @@ export function UseCases() {
                   y: hoveredCard === index ? -6 : 0,
                 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
-                className={`relative bg-surface-elevated border border-border rounded-lg p-6 h-full shadow-md hover:shadow-xl hover:border-primary/30 transition-all overflow-hidden`}
+                className={`relative bg-surface-elevated border border-border rounded-lg p-4 sm:p-6 h-full shadow-md hover:shadow-xl hover:border-primary/30 transition-all overflow-hidden`}
                 style={{
                   backgroundImage: `linear-gradient(to bottom right, ${persona.accentColor}08, transparent)`,
                 }}
@@ -99,15 +99,15 @@ export function UseCases() {
                 />
 
                 <div className="mb-4">
-                  <persona.icon className="w-8 h-8 mb-3" style={{ color: persona.accentColor }} />
+                  <persona.icon className="w-6 h-6 sm:w-8 sm:h-8 mb-3" style={{ color: persona.accentColor }} />
                   <div className="text-xs font-mono tracking-wide text-muted-foreground mb-2 uppercase font-semibold">
                     {persona.label}
                   </div>
-                  <h3 className="text-xl font-bold text-foreground mb-2">{persona.role}</h3>
-                  <p className="text-sm text-foreground-secondary leading-relaxed mb-4">{persona.description}</p>
+                  <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2">{persona.role}</h3>
+                  <p className="text-xs sm:text-sm text-foreground-secondary leading-relaxed mb-4">{persona.description}</p>
                 </div>
 
-                <div className="bg-background border border-border/50 rounded p-3 mb-4 space-y-1.5">
+                <div className="bg-background border border-border/50 rounded p-2 sm:p-3 mb-4 space-y-1.5">
                   {persona.logs?.map((log, logIndex) => (
                     <motion.div
                       key={logIndex}
@@ -115,10 +115,10 @@ export function UseCases() {
                         x: hoveredCard === index ? 4 : 0,
                       }}
                       transition={{ duration: 0.2, delay: logIndex * 0.03, ease: "easeOut" }}
-                      className="flex items-start gap-2 text-xs font-mono"
+                      className="flex items-start gap-1 sm:gap-2 text-xs font-mono"
                     >
-                      <span className="text-muted-foreground/60">[{log.time}]</span>
-                      <span className={log.accent ? "text-primary" : "text-muted-foreground"}>{log.message}</span>
+                      <span className="text-muted-foreground/60 text-[10px] sm:text-xs">[{log.time}]</span>
+                      <span className={`text-[10px] sm:text-xs ${log.accent ? "text-primary" : "text-muted-foreground"}`}>{log.message}</span>
                     </motion.div>
                   ))}
                 </div>

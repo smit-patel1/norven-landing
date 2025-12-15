@@ -127,7 +127,7 @@ export function ConsoleCard() {
 
     return (
       <>
-        <div className="px-4 pt-4 pb-2">
+        <div className="px-4 pt-4 pb-2 hidden sm:block">
           <div className="grid grid-cols-12 gap-2 px-3 py-2 text-xs font-mono text-muted-foreground uppercase tracking-wider">
             <div className="col-span-3">Agent</div>
             <div className="col-span-3">Action</div>
@@ -137,7 +137,7 @@ export function ConsoleCard() {
           </div>
         </div>
 
-        <div className="px-4 pb-4 space-y-1">
+        <div className="px-2 sm:px-4 pb-4 space-y-1">
           <AnimatePresence mode="wait">
             {actions.map((action, index) => (
               <motion.div
@@ -149,7 +149,7 @@ export function ConsoleCard() {
               >
                 <button
                   onClick={() => setSelectedRow(action.id === selectedRow ? null : action.id)}
-                  className={`w-full grid grid-cols-12 gap-2 px-3 py-2.5 rounded-md text-left transition-all relative overflow-hidden ${
+                  className={`w-full transition-all relative overflow-hidden rounded-md ${
                     selectedRow === action.id
                       ? "bg-primary/10 border border-primary/40 shadow-md"
                       : "hover:bg-surface/80 hover:border-primary/20 border border-transparent"
@@ -161,21 +161,45 @@ export function ConsoleCard() {
                       : ""
                   }`}
                 >
-                  <div className="col-span-3 text-sm font-mono text-primary truncate">{action.agent}</div>
-                  <div className="col-span-3 text-sm text-foreground/80 truncate">{action.action}</div>
-                  <div className="col-span-2 text-xs font-mono text-muted-foreground">{action.policy}</div>
-                  <div className="col-span-2">
-                    <span
-                      className={`inline-block px-2 py-0.5 rounded text-xs font-semibold ${
-                        action.decision === "Authorized"
-                          ? "bg-success/15 text-success border border-success/30"
-                          : "bg-danger/15 text-danger border border-danger/30"
-                      }`}
-                    >
-                      {action.decision}
-                    </span>
+                  {/* Mobile Layout */}
+                  <div className="sm:hidden px-3 py-2.5 space-y-2">
+                    <div className="flex items-center justify-between">
+                      <div className="text-xs font-mono text-primary truncate flex-1 mr-2">{action.agent}</div>
+                      <span
+                        className={`inline-block px-2 py-0.5 rounded text-xs font-semibold whitespace-nowrap ${
+                          action.decision === "Authorized"
+                            ? "bg-success/15 text-success border border-success/30"
+                            : "bg-danger/15 text-danger border border-danger/30"
+                        }`}
+                      >
+                        {action.decision}
+                      </span>
+                    </div>
+                    <div className="text-xs text-foreground/80 truncate">{action.action}</div>
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="font-mono text-muted-foreground">{action.policy}</span>
+                      <span className="font-mono text-muted-foreground">{action.latency}</span>
+                    </div>
                   </div>
-                  <div className="col-span-2 text-sm font-mono text-muted-foreground text-right">{action.latency}</div>
+
+                  {/* Desktop Layout */}
+                  <div className="hidden sm:grid grid-cols-12 gap-2 px-3 py-2.5">
+                    <div className="col-span-3 text-sm font-mono text-primary truncate">{action.agent}</div>
+                    <div className="col-span-3 text-sm text-foreground/80 truncate">{action.action}</div>
+                    <div className="col-span-2 text-xs font-mono text-muted-foreground">{action.policy}</div>
+                    <div className="col-span-2">
+                      <span
+                        className={`inline-block px-2 py-0.5 rounded text-xs font-semibold ${
+                          action.decision === "Authorized"
+                            ? "bg-success/15 text-success border border-success/30"
+                            : "bg-danger/15 text-danger border border-danger/30"
+                        }`}
+                      >
+                        {action.decision}
+                      </span>
+                    </div>
+                    <div className="col-span-2 text-sm font-mono text-muted-foreground text-right">{action.latency}</div>
+                  </div>
                 </button>
 
                 <AnimatePresence>
