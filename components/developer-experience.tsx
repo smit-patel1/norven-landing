@@ -1,29 +1,29 @@
-"use client";
+"use client"
 
-import { motion } from "framer-motion";
-import { Copy, Check, Terminal, CheckCircle } from "lucide-react";
-import { useState } from "react";
+import { motion } from "framer-motion"
+import { Copy, Check, Terminal, CheckCircle } from "lucide-react"
+import { useState } from "react"
 
 const codeExamples = {
   go: `package main
 
-import "github.com/norven-ai/sdk-go"
+import "github.com/norven-ai/sdk"
 
-// Bind agent workload identity
-norven := sdk.NewClient(sdk.Config{
-  WorkloadID: "agent-3xf-prod",
-  PrivateKey: os.Getenv("AGENT_KEY"),
+// Bind agent identity
+n := sdk.New(sdk.Config{
+  ID: "agent-3xf",
+  Key: os.Getenv("KEY"),
 })
 
-// Enforce policy before execution
-result, err := norven.Enforce(ctx, sdk.Request{
-  Action: "customer.read",
-  Resource: "customer:12345",
-  Context: map[string]string{
-  "workflow": "quarterly_report"},
-}, func() (interface{}, error) {
-  return db.Customers.FindByID("12345")
-})`,
+// Enforce before execution
+result, err := n.Enforce(ctx,
+  sdk.Req{
+    Action: "customer.read",
+    Resource: "customer:12345",
+  },
+  func() (interface{}, error) {
+    return db.Find("12345")
+  })`,
   typescript: `import { NorvenClient } from 'norven-ai'
 
 // Bind agent workload identity
@@ -54,31 +54,29 @@ result = await norven.enforce(
     resource="customer:12345",
     context={"workflow": "quarterly_report"}
 )(lambda: db.customers.find_by_id("12345"))`,
-};
+}
 
 export function DeveloperExperience() {
-  const [copied, setCopied] = useState(false);
-  const [copiedCli, setCopiedCli] = useState(false);
-  const [selectedLang, setSelectedLang] = useState<
-    "typescript" | "python" | "go"
-  >("go");
+  const [copied, setCopied] = useState(false)
+  const [copiedCli, setCopiedCli] = useState(false)
+  const [selectedLang, setSelectedLang] = useState<"typescript" | "python" | "go">("go")
 
   const handleCopyCode = () => {
-    navigator.clipboard.writeText(codeExamples[selectedLang]);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+    navigator.clipboard.writeText(codeExamples[selectedLang])
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
 
   const handleCopyCli = () => {
-    navigator.clipboard.writeText("npm install norven-ai");
-    setCopiedCli(true);
-    setTimeout(() => setCopiedCli(false), 2000);
-  };
+    navigator.clipboard.writeText("npm install norven-ai")
+    setCopiedCli(true)
+    setTimeout(() => setCopiedCli(false), 2000)
+  }
 
   return (
-    <section className="py-16 sm:py-20 md:py-24 px-4 sm:px-6 section-mid">
+    <section className="py-24 px-6 section-mid">
       <div className="container mx-auto">
-        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left - Code with tabs */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -91,13 +89,13 @@ export function DeveloperExperience() {
               {/* Vertical accent strip */}
               <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary" />
 
-              <div className="bg-surface px-3 sm:px-4 py-3 border-b border-border flex items-center justify-between">
-                <div className="flex gap-1 sm:gap-2">
+              <div className="bg-surface px-4 py-3 border-b border-border flex items-center justify-between">
+                <div className="flex gap-2">
                   {(["go", "typescript", "python"] as const).map((lang) => (
                     <motion.button
                       key={lang}
                       onClick={() => setSelectedLang(lang)}
-                      className={`relative px-2 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-full transition-all ${
+                      className={`relative px-4 py-2 text-sm font-medium rounded-full transition-all ${
                         selectedLang === lang
                           ? "text-primary-foreground bg-primary shadow-lg shadow-primary/50"
                           : "text-muted-foreground hover:text-primary hover:bg-surface-elevated"
@@ -106,11 +104,7 @@ export function DeveloperExperience() {
                       whileTap={{ scale: 0.98 }}
                       transition={{ duration: 0.2 }}
                     >
-                      {lang === "typescript"
-                        ? "TypeScript"
-                        : lang === "python"
-                        ? "Python"
-                        : "Go"}
+                      {lang === "typescript" ? "TypeScript" : lang === "python" ? "Python" : "Go"}
                     </motion.button>
                   ))}
                 </div>
@@ -131,12 +125,10 @@ export function DeveloperExperience() {
                 initial={{ opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.2 }}
-                className="p-3 sm:p-5 overflow-x-auto bg-background"
+                className="p-5 overflow-x-auto bg-background"
               >
-                <pre className="text-xs sm:text-sm font-mono leading-relaxed">
-                  <code className="text-foreground">
-                    {codeExamples[selectedLang]}
-                  </code>
+                <pre className="text-sm font-mono leading-relaxed">
+                  <code className="text-foreground">{codeExamples[selectedLang]}</code>
                 </pre>
               </motion.div>
             </div>
@@ -153,9 +145,7 @@ export function DeveloperExperience() {
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-success status-dot-success" />
                   <Terminal className="w-4 h-4 text-primary" />
-                  <span className="text-xs font-mono text-muted-foreground uppercase">
-                    $ terminal
-                  </span>
+                  <span className="text-xs font-mono text-muted-foreground uppercase">$ terminal</span>
                 </div>
                 <button
                   onClick={handleCopyCli}
@@ -198,13 +188,13 @@ export function DeveloperExperience() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="space-y-4 sm:space-y-6"
+            className="space-y-6"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground leading-tight text-balance">
+            <h2 className="text-4xl font-bold text-foreground leading-tight text-balance">
               Drop-in enforcement for existing agent systems
             </h2>
 
-            <ul className="space-y-2 sm:space-y-3 text-sm sm:text-base text-foreground-secondary leading-relaxed">
+            <ul className="space-y-3 text-foreground-secondary leading-relaxed">
               <li className="flex items-start gap-2">
                 <span className="text-primary mt-1">•</span>
                 <span>TypeScript, Python, and Go SDKs</span>
@@ -226,5 +216,5 @@ export function DeveloperExperience() {
         </div>
       </div>
     </section>
-  );
+  )
 }
