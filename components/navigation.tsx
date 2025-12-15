@@ -29,17 +29,35 @@ export function Navigation() {
     >
       <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between">
         <Link href="/" className="flex items-center hover:opacity-80 transition-opacity">
-          {/* Mobile: Always show mark only */}
-          <img
-            src="/norven-logo-mark.png"
-            alt="Norven Labs"
-            className="block sm:hidden"
-            style={{
-              background: "transparent",
-              height: "40px",
-              width: "auto",
-            }}
-          />
+          {/* Mobile: Show full logo when not scrolled, mark when scrolled */}
+          <div className="block sm:hidden relative" style={{ height: "40px" }}>
+            <img
+              src="/norven-logo-full.png"
+              alt="Norven Labs"
+              className={`transition-opacity duration-300 ${isScrolled ? "opacity-0" : "opacity-100"}`}
+              style={{
+                background: "transparent",
+                position: isScrolled ? "absolute" : "relative",
+                left: 0,
+                top: 0,
+                height: "40px",
+                width: "auto",
+              }}
+            />
+            <img
+              src="/norven-logo-mark.png"
+              alt="Norven Labs"
+              className={`transition-opacity duration-300 ${isScrolled ? "opacity-100" : "opacity-0"}`}
+              style={{
+                background: "transparent",
+                position: isScrolled ? "relative" : "absolute",
+                left: 0,
+                top: 0,
+                height: "36px",
+                width: "auto",
+              }}
+            />
+          </div>
 
           {/* Desktop: Show full logo when not scrolled, mark when scrolled */}
           <div className="hidden sm:block relative" style={{ height: "56px" }}>
